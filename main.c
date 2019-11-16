@@ -103,22 +103,45 @@ int main()
 			}
 			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_avg / n_measures;
 		}
-/*
-		time_with_current_sensor_id += time_count;
+
+		if(time_count >= time_count_prev)
+		{
+			time_with_current_sensor_id += time_count - time_count_prev;
+			time_count_prev = time_count;
+		}
+		else
+		{
+			time_with_current_sensor_id += time_count;
+		}
+		
 		if(time_with_current_sensor_id > 20000000/64)
 		{
 			time_with_current_sensor_id = 0;
-			if(sensor_id==1){sensor_id = 0;} else{sensor_id = 1;}
+			if(sensor_id==1)
+			{
+				sensor_id = 0;
+				locate(15);
+				lcd_send_4b_mode((uchar)'1');
+				locate(79);
+				lcd_send_4b_mode((uchar)'_');
+			} 
+			else
+			{
+				sensor_id = 1;
+				locate(15);
+				lcd_send_4b_mode((uchar)'_');
+				locate(79);
+				lcd_send_4b_mode((uchar)'2');
+			}
 		}
-*/
+
 		refresh_counter++;
 
 		if (refresh_counter > 20000)
 		{
 			refresh_counter = 0;
-			locate(8);
-			lcd_send_4b_mode((uchar)animation[(uchar)1]);
-			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 69, 7, 1); //rpm_x10
+			lcd_send_floatx10(gl_set[0].rpm_avg, 5, 7, 1); //rpm_x10
+			lcd_send_floatx10(gl_set[1].rpm_avg, 69, 7, 1); //rpm_x10
 		}
 	}
 	return 0;
