@@ -83,7 +83,7 @@ int main()
 		{
 			last_rpm_x10 = rpm_x10;
 
-			locate(78);
+			if(sensor_id == 0) {locate(14);} else {locate(78);}
 			lcd_send_4b_mode((uchar)animation[(uchar)anim_counter]);
 			anim_counter++;
 			if (anim_counter > 3)
@@ -114,7 +114,7 @@ int main()
 			time_with_current_sensor_id += time_count;
 		}
 		
-		if(time_with_current_sensor_id > 20000000/64)
+		if(time_with_current_sensor_id > 20000000)
 		{
 			time_with_current_sensor_id = 0;
 			if(sensor_id==1)

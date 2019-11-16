@@ -138,7 +138,7 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x972
+.text           0x00000000      0x97e
  *(.vectors)
  .vectors       0x00000000       0x34 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48.o
                 0x00000000                __vectors
@@ -221,51 +221,51 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
                 0x00000080                __vector_16
                 0x00000080                __vector_18
                 0x00000080                __vector_20
- .text          0x00000082      0x3aa main.o
+ .text          0x00000082      0x3b6 main.o
                 0x00000090                main
                 0x00000082                delta
- .text          0x0000042c       0x30 ini.o
-                0x0000044c                setup_io
-                0x0000042c                setup_timers
- .text          0x0000045c      0x152 isr.o
-                0x0000045c                __vector_13
-                0x0000047e                __vector_21
- .text          0x000005ae      0x2c2 lcd_4b.o
-                0x00000690                format
-                0x000005fe                ini_lcd_4_bit_mode
-                0x0000068e                lcd_contrast
-                0x0000064c                put_str
-                0x0000061e                lcd_ini_sequence
-                0x000005ae                lcd_send_4b_mode
-                0x000006e6                lcd_send_floatx10
-                0x0000067a                clr_line
-                0x000005f4                cls
-                0x00000642                locate
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_divmodsi4.o)
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_udivmodsi4.o)
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(ltoa.o)
- .text          0x00000870        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(strrev.o)
-                0x00000870                . = ALIGN (0x2)
+ .text          0x00000438       0x30 ini.o
+                0x00000458                setup_io
+                0x00000438                setup_timers
+ .text          0x00000468      0x152 isr.o
+                0x00000468                __vector_13
+                0x0000048a                __vector_21
+ .text          0x000005ba      0x2c2 lcd_4b.o
+                0x0000069c                format
+                0x0000060a                ini_lcd_4_bit_mode
+                0x0000069a                lcd_contrast
+                0x00000658                put_str
+                0x0000062a                lcd_ini_sequence
+                0x000005ba                lcd_send_4b_mode
+                0x000006f2                lcd_send_floatx10
+                0x00000686                clr_line
+                0x00000600                cls
+                0x0000064e                locate
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_divmodsi4.o)
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_udivmodsi4.o)
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(ltoa.o)
+ .text          0x0000087c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(strrev.o)
+                0x0000087c                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x00000870       0x36 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_divmodsi4.o)
-                0x00000870                __divmodsi4
- .text.libgcc   0x000008a6        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
- .text.libgcc   0x000008a6        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
- .text.libgcc   0x000008a6       0x44 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_udivmodsi4.o)
-                0x000008a6                __udivmodsi4
+ .text.libgcc   0x0000087c       0x36 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_divmodsi4.o)
+                0x0000087c                __divmodsi4
+ .text.libgcc   0x000008b2        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .text.libgcc   0x000008b2        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x000008b2       0x44 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_udivmodsi4.o)
+                0x000008b2                __udivmodsi4
  .text.avr-libc
-                0x000008ea       0x64 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(ltoa.o)
-                0x000008ea                ltoa
+                0x000008f6       0x64 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(ltoa.o)
+                0x000008f6                ltoa
  .text.avr-libc
-                0x0000094e       0x20 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(strrev.o)
-                0x0000094e                strrev
-                0x0000096e                . = ALIGN (0x2)
+                0x0000095a       0x20 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4\libc.a(strrev.o)
+                0x0000095a                strrev
+                0x0000097a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000096e        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
-                0x0000096e                exit
-                0x0000096e                _exit
+ .fini9         0x0000097a        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+                0x0000097a                exit
+                0x0000097a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -284,11 +284,11 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000096e        0x4 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
+ .fini0         0x0000097a        0x4 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000972                _etext = .
+                0x0000097e                _etext = .
 
-.data           0x00800100        0x0 load address 0x00000972
+.data           0x00800100        0x0 load address 0x0000097e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800100        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr4/crtm48.o
@@ -336,8 +336,8 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
                 0x00800175                t_capture
                 0x00800177                sensor_id
                 0x00800178                PROVIDE (__bss_end, .)
-                0x00000972                __data_load_start = LOADADDR (.data)
-                0x00000972                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000097e                __data_load_start = LOADADDR (.data)
+                0x0000097e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800178        0x0
                 0x00800178                PROVIDE (__noinit_start, .)
