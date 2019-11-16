@@ -24,7 +24,7 @@ uchar delta(uchar v1, uchar v2)
 
 int main()
 {
-	sensor_id = 0;
+	sensor_id = 1;
 	long time_count;
 	long rpm_x10, last_rpm_x10 = 0;
 
@@ -51,22 +51,22 @@ int main()
 	gl_set[0].rpm_avg = 0;
 	gl_set[0].ain_th_low = 20;
 	gl_set[0].ain_th_high = 45;
-	
+
 	gl_set[1].rpm_avg = 0;
 	gl_set[1].ain_th_low = 20;
 	gl_set[1].ain_th_high = 45;
 
 	LED_OFF;
-	ADMUX = 2;
+	ADMUX = 2 + sensor_id;
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
-
+	SENSOR_ON;
+	LED_ON;
 	LCD_CONTRAST = 0;
+
+	long int time_with_current_sensor_id = 0;
+
 	while (1)
 	{
-		ADMUX = 2;
-		SENSOR_ON;
-		LED_ON;
-
 		time_count = t_capture + (t_postscale * 65536);
 		rpm_x10 = 187500000 / time_count;
 		if (last_rpm_x10 == 0)
@@ -102,7 +102,14 @@ int main()
 			}
 			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_avg / n_measures;
 		}
-
+/*
+		time_with_current_sensor_id += time_count;
+		if(time_with_current_sensor_id > 20000000/64)
+		{
+			time_with_current_sensor_id = 0;
+			if(sensor_id==1){sensor_id = 0;} else{sensor_id = 1;}
+		}
+*/
 		refresh_counter++;
 
 		if (refresh_counter > 20000)
@@ -111,5 +118,5 @@ int main()
 			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 68, 7, 1); //rpm_x10
 		}
 	}
-return 0;
+	return 0;
 }

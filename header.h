@@ -22,8 +22,6 @@
 #define LCD_CONTRAST_ON  DDRD |= (1<<5);//TCCR0A = (1<<COM1B1)|(1<<WGM01)|(1<<WGM00);
 #define LCD_CONTRAST	OCR0B
 
-#define AIN0	OCR2A
-
 #define LED_PORT		PORTD
 #define LED_DDR			DDRD
 #define LED					PORTD7

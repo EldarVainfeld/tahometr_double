@@ -418,12 +418,12 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_pubnames
                 0x000001ee      0x12e lcd_4b.o
 
-.debug_info     0x00000000      0xc26
+.debug_info     0x00000000      0xc31
  *(.debug_info)
- .debug_info    0x00000000      0x29f main.o
- .debug_info    0x0000029f      0x1c3 ini.o
- .debug_info    0x00000462      0x1c5 isr.o
- .debug_info    0x00000627      0x5ff lcd_4b.o
+ .debug_info    0x00000000      0x2aa main.o
+ .debug_info    0x000002aa      0x1c3 ini.o
+ .debug_info    0x0000046d      0x1c5 isr.o
+ .debug_info    0x00000632      0x5ff lcd_4b.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev   0x00000000      0x41f
@@ -433,12 +433,12 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_abbrev  0x000001ac       0x9a isr.o
  .debug_abbrev  0x00000246      0x1d9 lcd_4b.o
 
-.debug_line     0x00000000      0x7e4
+.debug_line     0x00000000      0x7dc
  *(.debug_line)
- .debug_line    0x00000000      0x241 main.o
- .debug_line    0x00000241       0xd6 ini.o
- .debug_line    0x00000317       0xe8 isr.o
- .debug_line    0x000003ff      0x3e5 lcd_4b.o
+ .debug_line    0x00000000      0x239 main.o
+ .debug_line    0x00000239       0xd6 ini.o
+ .debug_line    0x0000030f       0xe8 isr.o
+ .debug_line    0x000003f7      0x3e5 lcd_4b.o
 
 .debug_frame    0x00000000      0x140
  *(.debug_frame)
@@ -447,21 +447,21 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr4\libgcc.a
  .debug_frame   0x00000060       0x30 isr.o
  .debug_frame   0x00000090       0xb0 lcd_4b.o
 
-.debug_str      0x00000000      0x2d7
+.debug_str      0x00000000      0x2e9
  *(.debug_str)
- .debug_str     0x00000000      0x181 main.o
-                                0x1c2 (size before relaxing)
- .debug_str     0x00000181       0x1f ini.o
+ .debug_str     0x00000000      0x193 main.o
+                                0x1de (size before relaxing)
+ .debug_str     0x00000193       0x1f ini.o
                                 0x184 (size before relaxing)
- .debug_str     0x000001a0       0x21 isr.o
+ .debug_str     0x000001b2       0x21 isr.o
                                 0x186 (size before relaxing)
- .debug_str     0x000001c1      0x116 lcd_4b.o
+ .debug_str     0x000001d3      0x116 lcd_4b.o
                                 0x28c (size before relaxing)
 
-.debug_loc      0x00000000      0x45e
+.debug_loc      0x00000000      0x469
  *(.debug_loc)
- .debug_loc     0x00000000       0x70 main.o
- .debug_loc     0x00000070      0x3ee lcd_4b.o
+ .debug_loc     0x00000000       0x7b main.o
+ .debug_loc     0x0000007b      0x3ee lcd_4b.o
 
 .debug_macinfo
  *(.debug_macinfo)

@@ -21,9 +21,8 @@ void setup_timers()
 
 void setup_io()
 {
-	DIDR0 = (1<<ADC2D); //disable digital input on ADC2
+	DIDR0 = (1<<ADC2D) | (1<<ADC3D); //disable digital input on ADC2 and ADC3
 	DDRB &= ~(1<<PORTB1); //set push button as input
-
 	PORTB |= (1<<PORTB1); //activte the pull up resistor for the push button
 	
 	LCD_EN_PORT |= _BV(LCD_EN);

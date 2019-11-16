@@ -11,17 +11,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   3 .debug_pubnames 0000031c  00000000  00000000  00000946  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .debug_info   00000c26  00000000  00000000  00000c62  2**0
+  4 .debug_info   00000c31  00000000  00000000  00000c62  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 0000041f  00000000  00000000  00001888  2**0
+  5 .debug_abbrev 0000041f  00000000  00000000  00001893  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   000007e4  00000000  00000000  00001ca7  2**0
+  6 .debug_line   000007dc  00000000  00000000  00001cb2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  00000140  00000000  00000000  0000248c  2**2
+  7 .debug_frame  00000140  00000000  00000000  00002490  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_str    000002d7  00000000  00000000  000025cc  2**0
+  8 .debug_str    000002e9  00000000  00000000  000025d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000045e  00000000  00000000  000028a3  2**0
+  9 .debug_loc    00000469  00000000  00000000  000028b9  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -145,124 +145,120 @@ int main()
   be:	de bf       	out	0x3e, r29	; 62
   c0:	0f be       	out	0x3f, r0	; 63
   c2:	cd bf       	out	0x3d, r28	; 61
-	sensor_id = 0;
-  c4:	10 92 77 01 	sts	0x0177, r1
+	sensor_id = 1;
+  c4:	81 e0       	ldi	r24, 0x01	; 1
+  c6:	80 93 77 01 	sts	0x0177, r24
 	long time_count;
 	long rpm_x10, last_rpm_x10 = 0;
 
 	uchar i;
 	char animation[4], anim_counter = 0;
 	animation[0] = 0xD9;
-  c8:	89 ed       	ldi	r24, 0xD9	; 217
-  ca:	89 83       	std	Y+1, r24	; 0x01
+  ca:	89 ed       	ldi	r24, 0xD9	; 217
+  cc:	89 83       	std	Y+1, r24	; 0x01
 	animation[1] = 0xC9;
-  cc:	89 ec       	ldi	r24, 0xC9	; 201
-  ce:	8a 83       	std	Y+2, r24	; 0x02
+  ce:	89 ec       	ldi	r24, 0xC9	; 201
+  d0:	8a 83       	std	Y+2, r24	; 0x02
 	animation[2] = 0xDA;
-  d0:	8a ed       	ldi	r24, 0xDA	; 218
-  d2:	8b 83       	std	Y+3, r24	; 0x03
+  d2:	8a ed       	ldi	r24, 0xDA	; 218
+  d4:	8b 83       	std	Y+3, r24	; 0x03
 	animation[3] = 0xC8;
-  d4:	88 ec       	ldi	r24, 0xC8	; 200
-  d6:	8c 83       	std	Y+4, r24	; 0x04
+  d6:	88 ec       	ldi	r24, 0xC8	; 200
+  d8:	8c 83       	std	Y+4, r24	; 0x04
 
 	setup_timers();
-  d8:	19 d1       	rcall	.+562    	; 0x30c <setup_timers>
+  da:	18 d1       	rcall	.+560    	; 0x30c <setup_timers>
 
 	setup_io();
-  da:	28 d1       	rcall	.+592    	; 0x32c <setup_io>
+  dc:	27 d1       	rcall	.+590    	; 0x32c <setup_io>
 
 	LCD_EN_DDR |= _BV(LCD_EN);
-  dc:	3d 9a       	sbi	0x07, 5	; 7
+  de:	3d 9a       	sbi	0x07, 5	; 7
 	LCD_RS_DDR |= _BV(LCD_RS);
-  de:	54 9a       	sbi	0x0a, 4	; 10
+  e0:	54 9a       	sbi	0x0a, 4	; 10
 	lcd_ini_sequence();
-  e0:	0e d2       	rcall	.+1052   	; 0x4fe <lcd_ini_sequence>
+  e2:	0d d2       	rcall	.+1050   	; 0x4fe <lcd_ini_sequence>
 	LED_ON
-  e2:	57 9a       	sbi	0x0a, 7	; 10
-  e4:	5f 9a       	sbi	0x0b, 7	; 11
+  e4:	57 9a       	sbi	0x0a, 7	; 10
+  e6:	5f 9a       	sbi	0x0b, 7	; 11
 	LCD_BL_ON
-  e6:	3c 9a       	sbi	0x07, 4	; 7
-  e8:	44 9a       	sbi	0x08, 4	; 8
+  e8:	3c 9a       	sbi	0x07, 4	; 7
+  ea:	44 9a       	sbi	0x08, 4	; 8
 	LCD_CONTRAST_ON
-  ea:	55 9a       	sbi	0x0a, 5	; 10
+  ec:	55 9a       	sbi	0x0a, 5	; 10
 	sei();
-  ec:	78 94       	sei
+  ee:	78 94       	sei
 	format(line1, line2);
-  ee:	84 e3       	ldi	r24, 0x34	; 52
-  f0:	90 e0       	ldi	r25, 0x00	; 0
-  f2:	66 e4       	ldi	r22, 0x46	; 70
-  f4:	70 e0       	ldi	r23, 0x00	; 0
-  f6:	3c d2       	rcall	.+1144   	; 0x570 <format>
+  f0:	84 e3       	ldi	r24, 0x34	; 52
+  f2:	90 e0       	ldi	r25, 0x00	; 0
+  f4:	66 e4       	ldi	r22, 0x46	; 70
+  f6:	70 e0       	ldi	r23, 0x00	; 0
+  f8:	3b d2       	rcall	.+1142   	; 0x570 <format>
 
 	gl_set[0].rpm_avg = 0;
-  f8:	10 92 03 01 	sts	0x0103, r1
-  fc:	10 92 04 01 	sts	0x0104, r1
- 100:	10 92 05 01 	sts	0x0105, r1
- 104:	10 92 06 01 	sts	0x0106, r1
+  fa:	10 92 03 01 	sts	0x0103, r1
+  fe:	10 92 04 01 	sts	0x0104, r1
+ 102:	10 92 05 01 	sts	0x0105, r1
+ 106:	10 92 06 01 	sts	0x0106, r1
 	gl_set[0].ain_th_low = 20;
- 108:	94 e1       	ldi	r25, 0x14	; 20
- 10a:	90 93 33 01 	sts	0x0133, r25
+ 10a:	94 e1       	ldi	r25, 0x14	; 20
+ 10c:	90 93 33 01 	sts	0x0133, r25
 	gl_set[0].ain_th_high = 45;
- 10e:	8d e2       	ldi	r24, 0x2D	; 45
- 110:	80 93 34 01 	sts	0x0134, r24
-	
+ 110:	8d e2       	ldi	r24, 0x2D	; 45
+ 112:	80 93 34 01 	sts	0x0134, r24
+
 	gl_set[1].rpm_avg = 0;
- 114:	10 92 3a 01 	sts	0x013A, r1
- 118:	10 92 3b 01 	sts	0x013B, r1
- 11c:	10 92 3c 01 	sts	0x013C, r1
- 120:	10 92 3d 01 	sts	0x013D, r1
+ 116:	10 92 3a 01 	sts	0x013A, r1
+ 11a:	10 92 3b 01 	sts	0x013B, r1
+ 11e:	10 92 3c 01 	sts	0x013C, r1
+ 122:	10 92 3d 01 	sts	0x013D, r1
 	gl_set[1].ain_th_low = 20;
- 124:	90 93 6a 01 	sts	0x016A, r25
+ 126:	90 93 6a 01 	sts	0x016A, r25
 	gl_set[1].ain_th_high = 45;
- 128:	80 93 6b 01 	sts	0x016B, r24
+ 12a:	80 93 6b 01 	sts	0x016B, r24
 
 	LED_OFF;
- 12c:	5f 98       	cbi	0x0b, 7	; 11
-	ADMUX = 2;
- 12e:	82 e0       	ldi	r24, 0x02	; 2
- 130:	80 93 7c 00 	sts	0x007C, r24
+ 12e:	5f 98       	cbi	0x0b, 7	; 11
+	ADMUX = 2 + sensor_id;
+ 130:	80 91 77 01 	lds	r24, 0x0177
+ 134:	8e 5f       	subi	r24, 0xFE	; 254
+ 136:	80 93 7c 00 	sts	0x007C, r24
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
- 134:	8d ee       	ldi	r24, 0xED	; 237
- 136:	80 93 7a 00 	sts	0x007A, r24
-
+ 13a:	8d ee       	ldi	r24, 0xED	; 237
+ 13c:	80 93 7a 00 	sts	0x007A, r24
+	SENSOR_ON;
+ 140:	39 9a       	sbi	0x07, 1	; 7
+ 142:	41 9a       	sbi	0x08, 1	; 8
+	LED_ON;
+ 144:	57 9a       	sbi	0x0a, 7	; 10
+ 146:	5f 9a       	sbi	0x0b, 7	; 11
 	LCD_CONTRAST = 0;
- 13a:	18 bc       	out	0x28, r1	; 40
- 13c:	66 24       	eor	r6, r6
- 13e:	77 24       	eor	r7, r7
- 140:	43 01       	movw	r8, r6
- 142:	55 24       	eor	r5, r5
-		SENSOR_ON;
-		LED_ON;
+ 148:	18 bc       	out	0x28, r1	; 40
+ 14a:	66 24       	eor	r6, r6
+ 14c:	77 24       	eor	r7, r7
+ 14e:	43 01       	movw	r8, r6
+ 150:	55 24       	eor	r5, r5
 
+	while (1)
+	{
 		time_count = t_capture + (t_postscale * 65536);
 		rpm_x10 = 187500000 / time_count;
 		if (last_rpm_x10 == 0)
- 144:	e7 e3       	ldi	r30, 0x37	; 55
- 146:	4e 2e       	mov	r4, r30
+ 152:	e7 e3       	ldi	r30, 0x37	; 55
+ 154:	4e 2e       	mov	r4, r30
 				anim_counter = 0;
 			if (n_measures < MAX_NUM_MEAS)
 				n_measures++;
 			for (i = 0; i < MAX_NUM_MEAS - 1; i++)
 			{
 				gl_set[sensor_id].rpm_his[i] = gl_set[sensor_id].rpm_his[i + 1];
- 148:	77 e3       	ldi	r23, 0x37	; 55
- 14a:	27 2e       	mov	r2, r23
- 14c:	31 2c       	mov	r3, r1
-	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
+ 156:	77 e3       	ldi	r23, 0x37	; 55
+ 158:	27 2e       	mov	r2, r23
+ 15a:	31 2c       	mov	r3, r1
+	long int time_with_current_sensor_id = 0;
 
-	LCD_CONTRAST = 0;
 	while (1)
 	{
-		ADMUX = 2;
- 14e:	22 e0       	ldi	r18, 0x02	; 2
- 150:	20 93 7c 00 	sts	0x007C, r18
-		SENSOR_ON;
- 154:	39 9a       	sbi	0x07, 1	; 7
- 156:	41 9a       	sbi	0x08, 1	; 8
-		LED_ON;
- 158:	57 9a       	sbi	0x0a, 7	; 10
- 15a:	5f 9a       	sbi	0x0b, 7	; 11
-
 		time_count = t_capture + (t_postscale * 65536);
 		rpm_x10 = 187500000 / time_count;
  15c:	20 91 73 01 	lds	r18, 0x0173
@@ -308,7 +304,7 @@ int main()
  1ac:	11 92       	st	Z+, r1
  1ae:	11 92       	st	Z+, r1
  1b0:	11 92       	st	Z+, r1
-
+	{
 		time_count = t_capture + (t_postscale * 65536);
 		rpm_x10 = 187500000 / time_count;
 		if (last_rpm_x10 == 0)
@@ -322,14 +318,14 @@ int main()
 			}
 		}
 		if (rpm_x10 > 40000)
- 1b8:	81 e4       	ldi	r24, 0x41	; 65
- 1ba:	a8 16       	cp	r10, r24
- 1bc:	8c e9       	ldi	r24, 0x9C	; 156
- 1be:	b8 06       	cpc	r11, r24
- 1c0:	80 e0       	ldi	r24, 0x00	; 0
- 1c2:	c8 06       	cpc	r12, r24
- 1c4:	80 e0       	ldi	r24, 0x00	; 0
- 1c6:	d8 06       	cpc	r13, r24
+ 1b8:	21 e4       	ldi	r18, 0x41	; 65
+ 1ba:	a2 16       	cp	r10, r18
+ 1bc:	2c e9       	ldi	r18, 0x9C	; 156
+ 1be:	b2 06       	cpc	r11, r18
+ 1c0:	20 e0       	ldi	r18, 0x00	; 0
+ 1c2:	c2 06       	cpc	r12, r18
+ 1c4:	20 e0       	ldi	r18, 0x00	; 0
+ 1c6:	d2 06       	cpc	r13, r18
  1c8:	0c f0       	brlt	.+2      	; 0x1cc <main+0x13c>
  1ca:	7a c0       	rjmp	.+244    	; 0x2c0 <main+0x230>
 			rpm_x10 = last_rpm_x10;
@@ -358,8 +354,8 @@ int main()
 			anim_counter++;
  1ec:	53 94       	inc	r5
 			if (anim_counter > 3)
- 1ee:	93 e0       	ldi	r25, 0x03	; 3
- 1f0:	95 15       	cp	r25, r5
+ 1ee:	83 e0       	ldi	r24, 0x03	; 3
+ 1f0:	85 15       	cp	r24, r5
  1f2:	08 f4       	brcc	.+2      	; 0x1f6 <main+0x166>
  1f4:	55 24       	eor	r5, r5
 				anim_counter = 0;
@@ -498,8 +494,11 @@ int main()
  2ba:	53 83       	std	Z+3, r21	; 0x03
  2bc:	35 01       	movw	r6, r10
  2be:	46 01       	movw	r8, r12
+		{
+			time_with_current_sensor_id = 0;
+			if(sensor_id==1){sensor_id = 0;} else{sensor_id = 1;}
 		}
-
+*/
 		refresh_counter++;
  2c0:	80 91 71 01 	lds	r24, 0x0171
  2c4:	90 91 72 01 	lds	r25, 0x0172
@@ -511,7 +510,7 @@ int main()
  2d2:	81 52       	subi	r24, 0x21	; 33
  2d4:	9e 44       	sbci	r25, 0x4E	; 78
  2d6:	08 f4       	brcc	.+2      	; 0x2da <main+0x24a>
- 2d8:	3a cf       	rjmp	.-396    	; 0x14e <main+0xbe>
+ 2d8:	41 cf       	rjmp	.-382    	; 0x15c <main+0xcc>
 		{
 			refresh_counter = 0;
  2da:	10 92 72 01 	sts	0x0172, r1
@@ -536,7 +535,7 @@ int main()
  304:	27 e0       	ldi	r18, 0x07	; 7
  306:	01 e0       	ldi	r16, 0x01	; 1
  308:	5e d1       	rcall	.+700    	; 0x5c6 <lcd_send_floatx10>
- 30a:	21 cf       	rjmp	.-446    	; 0x14e <main+0xbe>
+ 30a:	28 cf       	rjmp	.-432    	; 0x15c <main+0xcc>
 
 0000030c <setup_timers>:
 #include "header.h"
@@ -574,12 +573,11 @@ void setup_timers()
 
 void setup_io()
 {
-	DIDR0 = (1<<ADC2D); //disable digital input on ADC2
- 32c:	84 e0       	ldi	r24, 0x04	; 4
+	DIDR0 = (1<<ADC2D) | (1<<ADC3D); //disable digital input on ADC2 and ADC3
+ 32c:	8c e0       	ldi	r24, 0x0C	; 12
  32e:	80 93 7e 00 	sts	0x007E, r24
 	DDRB &= ~(1<<PORTB1); //set push button as input
  332:	21 98       	cbi	0x04, 1	; 4
-
 	PORTB |= (1<<PORTB1); //activte the pull up resistor for the push button
  334:	29 9a       	sbi	0x05, 1	; 5
 	
