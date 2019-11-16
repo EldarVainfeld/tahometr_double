@@ -24,7 +24,7 @@ uchar delta(uchar v1, uchar v2)
 
 int main()
 {
-	sensor_id = 1;
+	sensor_id = 0;
 	long time_count;
 	long rpm_x10, last_rpm_x10 = 0;
 
@@ -64,6 +64,7 @@ int main()
 	LCD_CONTRAST = 0;
 
 	long int time_with_current_sensor_id = 0;
+	long int time_count_prev = 0;
 
 	while (1)
 	{
@@ -82,7 +83,7 @@ int main()
 		{
 			last_rpm_x10 = rpm_x10;
 
-			locate(77);
+			locate(78);
 			lcd_send_4b_mode((uchar)animation[(uchar)anim_counter]);
 			anim_counter++;
 			if (anim_counter > 3)
@@ -115,7 +116,9 @@ int main()
 		if (refresh_counter > 20000)
 		{
 			refresh_counter = 0;
-			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 68, 7, 1); //rpm_x10
+			locate(60);
+			lcd_send_4b_mode((uchar)animation[(uchar)1]);
+			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 69, 7, 1); //rpm_x10
 		}
 	}
 	return 0;
