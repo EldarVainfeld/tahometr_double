@@ -26,10 +26,10 @@ int main()
 {
 	sensor_id = 0;
 	long time_count;
-	long rpm_x10, last_rpm_x10 = 0;
+	long rpm_x10, last_rpm_x10[2] = {0, 0};
 
 	uchar i;
-	char animation[4], anim_counter = 0;
+	char animation[4], anim_counter[2] = {0, 0};
 	animation[0] = 0xD9;
 	animation[1] = 0xC9;
 	animation[2] = 0xDA;
@@ -70,7 +70,7 @@ int main()
 	{
 		time_count = t_capture + (t_postscale * 65536);
 		rpm_x10 = 187500000 / time_count;
-		if (last_rpm_x10 == 0)
+		if (last_rpm_x10[sensor_id] == 0)
 		{
 			for (i = 0; i < MAX_NUM_MEAS; i++)
 			{
@@ -78,18 +78,18 @@ int main()
 			}
 		}
 		if (rpm_x10 > 40000)
-			rpm_x10 = last_rpm_x10;
-		if (last_rpm_x10 != rpm_x10)
+			rpm_x10 = last_rpm_x10[sensor_id];
+		if (last_rpm_x10[sensor_id] != rpm_x10)
 		{
-			last_rpm_x10 = rpm_x10;
+			last_rpm_x10[sensor_id] = rpm_x10;
 
 			if(sensor_id == 0) {locate(14);} else {locate(78);}
-			lcd_send_4b_mode((uchar)animation[(uchar)anim_counter]);
-			anim_counter++;
-			if (anim_counter > 3)
-				anim_counter = 0;
-			if (n_measures < MAX_NUM_MEAS)
-				n_measures++;
+			lcd_send_4b_mode((uchar)animation[(uchar)anim_counter[sensor_id]]);
+			anim_counter[sensor_id]++;
+			if (anim_counter[sensor_id] > 3)
+				anim_counter[sensor_id] = 0;
+			if (gl_set[sensor_id].n_measures < MAX_NUM_MEAS)
+				gl_set[sensor_id].n_measures++;
 			for (i = 0; i < MAX_NUM_MEAS - 1; i++)
 			{
 				gl_set[sensor_id].rpm_his[i] = gl_set[sensor_id].rpm_his[i + 1];
@@ -101,7 +101,7 @@ int main()
 			{
 				gl_set[sensor_id].rpm_avg += gl_set[sensor_id].rpm_his[i];
 			}
-			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_avg / n_measures;
+			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_avg / gl_set[sensor_id].n_measures;
 		}
 
 		if(time_count >= time_count_prev)

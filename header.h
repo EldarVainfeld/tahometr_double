@@ -89,7 +89,7 @@ struct global_settings{
     long rpm_his[MAX_NUM_MEAS + 1];
     uchar ain_th_low,ain_th_high,ir_value,last_state;
     uchar ir_history_a,ir_history_b;
-    uchar ir_avg;
+    uchar ir_avg, n_measures;
 };
 
 //globals
@@ -101,4 +101,3 @@ unsigned int refresh_counter;
 unsigned int t_capture,t_postscale;
 uchar post_scaller;
 uchar t; //used for lcd
-uchar n_measures;
