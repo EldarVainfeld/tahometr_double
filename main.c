@@ -3,6 +3,7 @@
 // V0.1 BY IBRAHIM KAMAL
 // (c) WWW.IKALOGIC.COM
 // Protected by Creative Commons License.
+//Updated to accept two sensors
 
 #include "header.h"
 
@@ -25,8 +26,8 @@ int main()
 {
 	sensor_id = 0;
 	long time_count;
-	long rpm_x10, last_rpm_x10 = 0, rpm_avg = 0;
-	float contrast_calculator;
+	long rpm_x10, last_rpm_x10 = 0;
+
 	uchar i;
 	char animation[4], anim_counter = 0;
 	animation[0] = 0xD9;
@@ -47,8 +48,14 @@ int main()
 	sei();
 	format(line1, line2);
 
-	gl_set[sensor_id].ain_th_low = 20;
-	gl_set[sensor_id].ain_th_high = 45;
+	gl_set[0].rpm_avg = 0;
+	gl_set[0].ain_th_low = 20;
+	gl_set[0].ain_th_high = 45;
+	
+	gl_set[1].rpm_avg = 0;
+	gl_set[1].ain_th_low = 20;
+	gl_set[1].ain_th_high = 45;
+
 	LED_OFF;
 	ADMUX = 2;
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
@@ -64,7 +71,7 @@ int main()
 		rpm_x10 = 187500000 / time_count;
 		if (last_rpm_x10 == 0)
 		{
-			for (i = 0; i < 30; i++)
+			for (i = 0; i < MAX_NUM_MEAS; i++)
 			{
 				gl_set[sensor_id].rpm_his[i] = 0;
 			}
@@ -80,20 +87,20 @@ int main()
 			anim_counter++;
 			if (anim_counter > 3)
 				anim_counter = 0;
-			if (n_measures < 30)
+			if (n_measures < MAX_NUM_MEAS)
 				n_measures++;
-			for (i = 0; i < 29; i++)
+			for (i = 0; i < MAX_NUM_MEAS - 1; i++)
 			{
 				gl_set[sensor_id].rpm_his[i] = gl_set[sensor_id].rpm_his[i + 1];
 			}
-			gl_set[sensor_id].rpm_his[29] = rpm_x10;
+			gl_set[sensor_id].rpm_his[MAX_NUM_MEAS - 1] = rpm_x10;
 
-			rpm_avg = 0;
-			for (i = 0; i < 30; i++)
+			gl_set[sensor_id].rpm_avg = 0;
+			for (i = 0; i < MAX_NUM_MEAS; i++)
 			{
-				rpm_avg += gl_set[sensor_id].rpm_his[i];
+				gl_set[sensor_id].rpm_avg += gl_set[sensor_id].rpm_his[i];
 			}
-			rpm_avg = rpm_avg / n_measures;
+			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_avg / n_measures;
 		}
 
 		refresh_counter++;
@@ -101,7 +108,7 @@ int main()
 		if (refresh_counter > 20000)
 		{
 			refresh_counter = 0;
-			lcd_send_floatx10(rpm_avg, 68, 7, 1); //rpm_x10
+			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 68, 7, 1); //rpm_x10
 		}
 	}
 return 0;

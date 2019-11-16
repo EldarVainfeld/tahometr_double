@@ -78,6 +78,8 @@ void clr_line(uchar start_add);
 uchar delta(uchar v1,uchar v2);
 void put_str(uchar pos, char* str);
 
+#define MAX_NUM_MEAS (uchar)30
+
 struct global_settings{
 	// ir_value : contains the value of the intensity of IR reflexion
 	// ain_th_high : High theshold (rizing hysteresis)
@@ -85,7 +87,8 @@ struct global_settings{
 	// t_capture & t_postscale : reading of the time elapsed since last detected cycle
 	// ir_history_b and ir_history_a: hold the last two values of ir_value 
 	// last_state : used to remember which hysteresis level to use
-    long rpm_his[31];
+    long rpm_avg;
+    long rpm_his[MAX_NUM_MEAS + 1];
     uchar ain_th_low,ain_th_high,ir_value,last_state;
     uchar ir_history_a,ir_history_b;
     uchar ir_avg;
