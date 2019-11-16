@@ -116,7 +116,7 @@ int main()
 		if (refresh_counter > 20000)
 		{
 			refresh_counter = 0;
-			locate(60);
+			locate(8);
 			lcd_send_4b_mode((uchar)animation[(uchar)1]);
 			lcd_send_floatx10(gl_set[sensor_id].rpm_avg, 69, 7, 1); //rpm_x10
 		}

@@ -514,8 +514,8 @@ int main()
 			refresh_counter = 0;
  2d8:	10 92 72 01 	sts	0x0172, r1
  2dc:	10 92 71 01 	sts	0x0171, r1
-			locate(60);
- 2e0:	8c e3       	ldi	r24, 0x3C	; 60
+			locate(8);
+ 2e0:	88 e0       	ldi	r24, 0x08	; 8
  2e2:	22 d1       	rcall	.+580    	; 0x528 <locate>
 			lcd_send_4b_mode((uchar)animation[(uchar)1]);
  2e4:	89 ec       	ldi	r24, 0xC9	; 201
