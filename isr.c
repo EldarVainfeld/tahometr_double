@@ -5,33 +5,32 @@
 ISR(ADC_vect)
 {
 	//Global variables used :
-	// ir_value : contains the value of the intensity of IR reflexion
-	// ain_th_high : High theshold (rizing hysteresis)
-	// ain_th_low : Low theshold (falling hysteresis)
+	// gl_set[sensor_id].ir_value : contains the value of the intensity of IR reflexion
+	// gl_set[sensor_id].ain_th_high : High theshold (rizing hysteresis)
+	// gl_set[sensor_id].ain_th_low : Low theshold (falling hysteresis)
 	// t_capture & t_postscale : reading of the time elapsed since last detected cycle
-	// ir_history_b and ir_history_a: hold the last two values of ir_value 
-	// last_state : used to remember which hysteresis level to use
-	ir_value = ADC>>2;			
-	if ((ir_value > ain_th_high) && (last_state==0)) //a cycle is detected 
+	// gl_set[sensor_id].ir_history_b and gl_set[sensor_id].ir_history_a: hold the last two values of gl_set[sensor_id].ir_value 
+	// gl_set[sensor_id].last_state : used to remember which hysteresis level to use
+	gl_set[sensor_id].ir_value = ADC>>2;			
+	if ((gl_set[sensor_id].ir_value > gl_set[sensor_id].ain_th_high) && (gl_set[sensor_id].last_state==0)) //a cycle is detected 
 	{
-		//n_cap++;
-		last_state = 1; //for next edge detection, use the falling hysteresis for next detection
+		gl_set[sensor_id].last_state = 1; //for next edge detection, use the falling hysteresis for next detection
 		t_capture=TCNT1;TCNT1 = 0;
 		t_postscale=post_scaller; post_scaller=0;
 	}
 
-	if ((ir_value < ain_th_low) && (last_state==1)) //a low level is detected
+	if ((gl_set[sensor_id].ir_value < gl_set[sensor_id].ain_th_low) && (gl_set[sensor_id].last_state==1)) //a low level is detected
 	{
-		last_state = 0; //for next edge detection, use the rising hysteresis for next detection
+		gl_set[sensor_id].last_state = 0; //for next edge detection, use the rising hysteresis for next detection
 	}
 
-	if (delta(ir_history_a,ir_value) > 10)
+	if (delta(gl_set[sensor_id].ir_history_a,gl_set[sensor_id].ir_value) > 10)
 	{
-		ir_history_b = ir_history_a;
-		ir_history_a = ir_value;
-		ir_avg = (ir_history_a+ir_history_b)/2;
-		ain_th_high = ir_avg + 5;
-		ain_th_low = ir_avg - 5;
+		gl_set[sensor_id].ir_history_b = gl_set[sensor_id].ir_history_a;
+		gl_set[sensor_id].ir_history_a = gl_set[sensor_id].ir_value;
+		gl_set[sensor_id].ir_avg = (gl_set[sensor_id].ir_history_a+gl_set[sensor_id].ir_history_b)/2;
+		gl_set[sensor_id].ain_th_high = gl_set[sensor_id].ir_avg + 5;
+		gl_set[sensor_id].ain_th_low = gl_set[sensor_id].ir_avg - 5;
 	}
 }
 

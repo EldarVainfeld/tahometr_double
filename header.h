@@ -78,10 +78,26 @@ void clr_line(uchar start_add);
 uchar delta(uchar v1,uchar v2);
 void put_str(uchar pos, char* str);
 
+struct global_settings{
+	// ir_value : contains the value of the intensity of IR reflexion
+	// ain_th_high : High theshold (rizing hysteresis)
+	// ain_th_low : Low theshold (falling hysteresis)
+	// t_capture & t_postscale : reading of the time elapsed since last detected cycle
+	// ir_history_b and ir_history_a: hold the last two values of ir_value 
+	// last_state : used to remember which hysteresis level to use
+    long rpm_his[31];
+    uchar ain_th_low,ain_th_high,ir_value,last_state;
+    uchar ir_history_a,ir_history_b;
+    uchar ir_avg;
+};
+
 //globals
-long rpm_his[31];
-unsigned int ambient_value,t_capture,t_postscale,time_a,time_b,refresh_counter;
-uchar timer_1_cps,post_scaller,pos_scale_a,pos_scale_b,n_cap,ain_th_low,ain_th_high,ir_value,last_ir_value,last_state;
-uchar ir_history_a,ir_history_b;
-uchar ir_avg,t,n_measures;
-uchar v_bg;
+
+struct global_settings gl_set[2]; // we are going to have two sets of variables for every sensor
+uchar sensor_id; //the id-number of the current sensor
+
+unsigned int refresh_counter;
+unsigned int t_capture,t_postscale;
+uchar post_scaller;
+uchar t; //used for lcd
+uchar n_measures;
