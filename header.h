@@ -78,7 +78,7 @@ void clr_line(uchar start_add);
 uchar delta(uchar v1,uchar v2);
 void put_str(uchar pos, char* str);
 
-#define MAX_NUM_MEAS (uchar)30
+#define MAX_NUM_MEAS (uchar)10
 
 struct global_settings{
 	// ir_value : contains the value of the intensity of IR reflexion
