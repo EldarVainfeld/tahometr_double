@@ -88,6 +88,7 @@ int main()
 	LED_OFF;
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
 	SENSOR_ON;
+	SENSOR_OFF;
 	LED_ON;
 	LCD_CONTRAST = 0;
 
