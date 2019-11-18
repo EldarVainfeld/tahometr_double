@@ -84,17 +84,16 @@ int main()
 		gl_set[j].anim_counter = 0;
 		gl_set[j].anim_counter_old = 0;
 	}
+	measurement_started = 1;
+	measurement_done = 0;
 
 	LED_OFF;
+	ADMUX = 2 + sensor_id;
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
-//	DDRC |= (1<<PORTC1); 
-//	PORTC |= (1<<PORTC1); 
-	DDRC |= (1<<PORTC3); 
-	PORTC |= (1<<PORTC3);
+	SENSOR_ON;
 	LED_ON;
 	LCD_CONTRAST = 0;
 
-	switch_sensor();
 	while (1)
 	{
 		time_count = t_capture + (t_postscale * 65536);
