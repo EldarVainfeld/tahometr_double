@@ -75,6 +75,7 @@ void lcd_ini_sequence();
 void clr_line(uchar start_add);
 uchar delta(uchar v1,uchar v2);
 void put_str(uchar pos, char* str);
+void switch_sensor();
 
 #define MAX_NUM_MEAS (uchar)10
 
@@ -87,16 +88,18 @@ struct global_settings{
 	// last_state : used to remember which hysteresis level to use
     long rpm_avg;
     long rpm_his[MAX_NUM_MEAS + 1];
+	uchar last_rpm_indx;
     uchar ain_th_low,ain_th_high,ir_value,last_state;
     uchar ir_history_a,ir_history_b;
-    uchar ir_avg, n_measures;
+    uchar ir_avg;
+	char anim_counter, anim_counter_old;
 };
 
 //globals
-
 struct global_settings gl_set[2]; // we are going to have two sets of variables for every sensor
 uchar sensor_id; //the id-number of the current sensor
-
+uchar measurement_started, measurement_done;
+long rpm_x10, time_count;
 unsigned int refresh_counter;
 unsigned int t_capture,t_postscale;
 uchar post_scaller;
