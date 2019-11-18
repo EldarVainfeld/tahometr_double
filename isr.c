@@ -30,7 +30,13 @@ ISR(ADC_vect)
 			{
 				rpm_x10 = 187500000 / time_count;
 				if (rpm_x10 < 45000)
-					gl_set[sensor_id].rpm_his[gl_set[sensor_id].last_rpm_indx++] = rpm_x10;
+					{
+						gl_set[sensor_id].rpm_his[gl_set[sensor_id].last_rpm_indx++] = rpm_x10;
+						if(gl_set[sensor_id].last_rpm_indx >= MAX_NUM_MEAS)
+						{
+							gl_set[sensor_id].last_rpm_indx = 0;
+						}
+					}
 			}
 			measurement_done = 1;
 		}

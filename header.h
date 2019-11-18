@@ -100,7 +100,6 @@ struct global_settings gl_set[2]; // we are going to have two sets of variables 
 uchar sensor_id; //the id-number of the current sensor
 uchar measurement_started, measurement_done;
 long rpm_x10, time_count;
-unsigned int refresh_counter;
 unsigned int t_capture,t_postscale;
 uchar post_scaller;
 uchar t; //used for lcd
