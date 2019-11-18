@@ -29,8 +29,8 @@
 #define LED_ON			DDRD |= (1<<LED); LED_PORT |= (1<<LED);
 #define LED_OFF			LED_PORT &= (~(1<<LED));
 
-#define SENSOR_ON 		DDRC |= (1<<PORTC1); PORTC |= (1<<PORTC1);
-#define SENSOR_OFF 	PORTC &= (~(1<<PORTC1));
+#define SENSOR_ON 		DDRC |= (1<<PORTC1); PORTC |= (1<<PORTC1); DDRC |= (1<<PORTC3); PORTC |= (1<<PORTC3);
+#define SENSOR_OFF 	PORTC &= (~(1<<PORTC1)); PORTC &= (~(1<<PORTC3));
 
 //ADC
 #define ADC_CI ADCSRA |= (1<<ADIF);
@@ -77,7 +77,7 @@ uchar delta(uchar v1,uchar v2);
 void put_str(uchar pos, char* str);
 void switch_sensor();
 
-#define MAX_NUM_MEAS (uchar)10
+#define MAX_NUM_MEAS (uchar)5
 
 struct global_settings{
 	// ir_value : contains the value of the intensity of IR reflexion
