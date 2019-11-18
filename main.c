@@ -87,7 +87,10 @@ int main()
 
 	LED_OFF;
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
-
+//	DDRC |= (1<<PORTC1); 
+//	PORTC |= (1<<PORTC1); 
+	DDRC |= (1<<PORTC3); 
+	PORTC |= (1<<PORTC3);
 	LED_ON;
 	LCD_CONTRAST = 0;
 
