@@ -29,7 +29,7 @@ ISR(ADC_vect)
 			if (time_count)
 			{
 				rpm_x10 = 187500000 / time_count;
-				if (1) //(rpm_x10 < 45000)
+				if (rpm_x10 < 35000)
 				{
 					gl_set[sensor_id].rpm_his[gl_set[sensor_id].last_rpm_indx++] = rpm_x10;
 					if (gl_set[sensor_id].last_rpm_indx >= MAX_NUM_MEAS)
