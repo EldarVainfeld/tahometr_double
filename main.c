@@ -84,11 +84,9 @@ int main()
 		gl_set[j].anim_counter = 0;
 		gl_set[j].anim_counter_old = 0;
 	}
-	measurement_started = 1;
-	measurement_done = 0;
-
+	
 	LED_OFF;
-	ADMUX = 2 + sensor_id;
+	switch_sensor();
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
 	SENSOR_ON;
 	LED_ON;
