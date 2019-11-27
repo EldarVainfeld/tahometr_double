@@ -49,6 +49,7 @@ int main()
 {
 	sensor_id = 0;
 	long time_count;
+	long rpm_sum;
 
 	uchar i, j;
 	char animation[4];
@@ -102,12 +103,12 @@ int main()
 		}
 		if (measurement_done)
 		{
-			gl_set[sensor_id].rpm_avg = gl_set[sensor_id].rpm_his[0];
-			for (i = 1; i < MAX_NUM_MEAS; i++)
+			rpm_sum = 0;
+			for (i = 0; i < MAX_NUM_MEAS; i++)
 			{
-				gl_set[sensor_id].rpm_avg += gl_set[sensor_id].rpm_his[i];
+				rpm_sum += gl_set[sensor_id].rpm_his[i];
 			}
-			gl_set[sensor_id].rpm_avg /= MAX_NUM_MEAS;
+			gl_set[sensor_id].rpm_avg = rpm_sum / MAX_NUM_MEAS;
 			switch (sensor_id)
 			{
 			case 0:
