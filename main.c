@@ -30,7 +30,7 @@ void switch_sensor()
 		lcd_send_4b_mode((uchar)'1');
 		locate(79);
 		lcd_send_4b_mode((uchar)'_');
-		ADMUX = 3;
+		ADMUX = 2;
 	}
 	else
 	{
