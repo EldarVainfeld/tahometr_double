@@ -319,7 +319,7 @@ int main()
 		gl_set[j].anim_counter = 0;
 		gl_set[j].anim_counter_old = 0;
 	}
-	
+
 	LED_OFF;
  17e:	5f 98       	cbi	0x0b, 7	; 11
 	switch_sensor();
@@ -352,7 +352,7 @@ int main()
 		{
 			gl_set[0].anim_counter_old = gl_set[0].anim_counter;
 			locate(14);
-			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);			
+			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);
  19c:	5e 01       	movw	r10, r28
  19e:	08 94       	sec
  1a0:	a1 1c       	adc	r10, r1
@@ -533,7 +533,7 @@ int main()
 			locate(14);
  2da:	8e e0       	ldi	r24, 0x0E	; 14
  2dc:	a1 d1       	rcall	.+834    	; 0x620 <locate>
-			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);			
+			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);
  2de:	80 91 43 01 	lds	r24, 0x0143
  2e2:	f5 01       	movw	r30, r10
  2e4:	e8 0f       	add	r30, r24
@@ -553,7 +553,7 @@ int main()
 			locate(78);
  2fe:	8e e4       	ldi	r24, 0x4E	; 78
  300:	8f d1       	rcall	.+798    	; 0x620 <locate>
-			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);			
+			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);
  302:	80 91 43 01 	lds	r24, 0x0143
  306:	f5 01       	movw	r30, r10
  308:	e8 0f       	add	r30, r24
@@ -568,16 +568,16 @@ int main()
 void setup_timers()
 {
 	//setup timer 0 for contast pwm
-	TCCR0A = (1<<COM1B1)|(1<<WGM01)|(1<<WGM00);
+	TCCR0A = (1 << COM1B1) | (1 << WGM01) | (1 << WGM00);
  312:	83 e2       	ldi	r24, 0x23	; 35
  314:	84 bd       	out	0x24, r24	; 36
-	TCCR0B = (1<<CS00); 
+	TCCR0B = (1 << CS00);
  316:	91 e0       	ldi	r25, 0x01	; 1
  318:	95 bd       	out	0x25, r25	; 37
-	OCR0B = 25; 
+	OCR0B = 25;
  31a:	89 e1       	ldi	r24, 0x19	; 25
  31c:	88 bd       	out	0x28, r24	; 40
-	TIMSK0 = (0<<OCIE0A);
+	TIMSK0 = (0 << OCIE0A);
  31e:	10 92 6e 00 	sts	0x006E, r1
 
 	//Setup timer1 for RPM counting
@@ -586,29 +586,26 @@ void setup_timers()
 	TCCR1B = 3;
  326:	83 e0       	ldi	r24, 0x03	; 3
  328:	80 93 81 00 	sts	0x0081, r24
-	TIMSK1 = (1<<TOIE1);
+	TIMSK1 = (1 << TOIE1);
  32c:	90 93 6f 00 	sts	0x006F, r25
-
-
 }
  330:	08 95       	ret
 
 00000332 <setup_io>:
 
-
 void setup_io()
 {
-	DIDR0 = (1<<ADC2D) | (1<<ADC3D); //disable digital input on ADC2 and ADC3
+	DIDR0 = (1 << ADC2D) | (1 << ADC3D); //disable digital input on ADC2 and ADC3
  332:	8c e0       	ldi	r24, 0x0C	; 12
  334:	80 93 7e 00 	sts	0x007E, r24
-	DDRB &= ~(1<<PORTB1); //set push button as input
+	DDRB &= ~(1 << PORTB1);				 //set push button as input
  338:	21 98       	cbi	0x04, 1	; 4
-	PORTB |= (1<<PORTB1); //activte the pull up resistor for the push button
+	PORTB |= (1 << PORTB1);				 //activte the pull up resistor for the push button
  33a:	29 9a       	sbi	0x05, 1	; 5
-	
+
 	LCD_EN_PORT |= _BV(LCD_EN);
  33c:	45 9a       	sbi	0x08, 5	; 8
-  LCD_RS_PORT &= ~(_BV(LCD_RS));	
+	LCD_RS_PORT &= ~(_BV(LCD_RS));
  33e:	5c 98       	cbi	0x0b, 4	; 11
 }
  340:	08 95       	ret
@@ -792,8 +789,8 @@ ISR(ADC_vect)
  482:	80 e0       	ldi	r24, 0x00	; 0
  484:	18 07       	cpc	r17, r24
  486:	ac f4       	brge	.+42     	; 0x4b2 <__vector_21+0x14e>
-					{
-						gl_set[sensor_id].rpm_his[gl_set[sensor_id].last_rpm_indx++] = rpm_x10;
+				{
+					gl_set[sensor_id].rpm_his[gl_set[sensor_id].last_rpm_indx++] = rpm_x10;
  488:	88 a9       	ldd	r24, Y+48	; 0x30
  48a:	e8 2f       	mov	r30, r24
  48c:	f0 e0       	ldi	r31, 0x00	; 0
@@ -812,14 +809,14 @@ ISR(ADC_vect)
  4a6:	13 83       	std	Z+3, r17	; 0x03
  4a8:	8f 5f       	subi	r24, 0xFF	; 255
  4aa:	88 ab       	std	Y+48, r24	; 0x30
-						if(gl_set[sensor_id].last_rpm_indx >= MAX_NUM_MEAS)
+					if (gl_set[sensor_id].last_rpm_indx >= MAX_NUM_MEAS)
  4ac:	8a 30       	cpi	r24, 0x0A	; 10
  4ae:	08 f0       	brcs	.+2      	; 0x4b2 <__vector_21+0x14e>
-						{
-							gl_set[sensor_id].last_rpm_indx = 0;
+					{
+						gl_set[sensor_id].last_rpm_indx = 0;
  4b0:	18 aa       	std	Y+48, r1	; 0x30
-						}
 					}
+				}
 			}
 			measurement_done = 1;
  4b2:	81 e0       	ldi	r24, 0x01	; 1
@@ -953,16 +950,16 @@ ISR(ADC_vect)
  58a:	18 95       	reti
 
 0000058c <lcd_send_4b_mode>:
+char PROGMEM lcd_ini[8] = {0x03, 0x03, 0x03, 0x02, 0x28, 0x0F, 0x0C, 0x06};
 
+void lcd_send_4b_mode(unsigned char data)
+{
 
-
-void lcd_send_4b_mode(unsigned char data){
-	
-  LCD_DDR |= (LCD_MASK); //ensure data pins are set as outputs (in case it is a shared bus)
+	LCD_DDR |= (LCD_MASK); //ensure data pins are set as outputs (in case it is a shared bus)
  58c:	9a b1       	in	r25, 0x0a	; 10
  58e:	9f 60       	ori	r25, 0x0F	; 15
  590:	9a b9       	out	0x0a, r25	; 10
-	
+
 	LCD_EN_PORT |= _BV(LCD_EN);
  592:	45 9a       	sbi	0x08, 5	; 8
     milliseconds can be achieved.
@@ -976,13 +973,13 @@ _delay_loop_2(uint16_t __count)
  598:	fa 01       	movw	r30, r20
  59a:	31 97       	sbiw	r30, 0x01	; 1
  59c:	f1 f7       	brne	.-4      	; 0x59a <lcd_send_4b_mode+0xe>
-	_delay_ms (1);
-	
+	_delay_ms(1);
+
 	LCD_PORT &= ~(LCD_MASK); //erase previous data
  59e:	9b b1       	in	r25, 0x0b	; 11
  5a0:	90 7f       	andi	r25, 0xF0	; 240
  5a2:	9b b9       	out	0x0b, r25	; 11
-	LCD_PORT |=  ((data>>4)<<LCD_SHIFT)&LCD_MASK;
+	LCD_PORT |= ((data >> 4) << LCD_SHIFT) & LCD_MASK;
  5a4:	2b b1       	in	r18, 0x0b	; 11
  5a6:	98 2f       	mov	r25, r24
  5a8:	92 95       	swap	r25
@@ -999,40 +996,39 @@ _delay_loop_2(uint16_t __count)
  5b4:	fa 01       	movw	r30, r20
  5b6:	31 97       	sbiw	r30, 0x01	; 1
  5b8:	f1 f7       	brne	.-4      	; 0x5b6 <lcd_send_4b_mode+0x2a>
-	_delay_ms (1);
-	
+	_delay_ms(1);
+
 	LCD_PORT &= ~(LCD_MASK); //erase previous data
  5ba:	9b b1       	in	r25, 0x0b	; 11
  5bc:	90 7f       	andi	r25, 0xF0	; 240
  5be:	9b b9       	out	0x0b, r25	; 11
-	LCD_PORT |=  ((data&LCD_MASK)<<LCD_SHIFT);
+	LCD_PORT |= ((data & LCD_MASK) << LCD_SHIFT);
  5c0:	9b b1       	in	r25, 0x0b	; 11
  5c2:	8f 70       	andi	r24, 0x0F	; 15
  5c4:	98 2b       	or	r25, r24
  5c6:	9b b9       	out	0x0b, r25	; 11
-
 
 	LCD_EN_PORT &= ~(_BV(LCD_EN));
  5c8:	45 98       	cbi	0x08, 5	; 8
  5ca:	ca 01       	movw	r24, r20
  5cc:	01 97       	sbiw	r24, 0x01	; 1
  5ce:	f1 f7       	brne	.-4      	; 0x5cc <lcd_send_4b_mode+0x40>
-	_delay_ms (1);
-} 
+	_delay_ms(1);
+}
  5d0:	08 95       	ret
 
 000005d2 <cls>:
-		_delay_ms(10); //wait for LCD to start up
-		ini_lcd_4_bit_mode();
-		cls();
+	ini_lcd_4_bit_mode();
+	cls();
 }
-void cls(){     // clear the display
-   LCD_RS_PORT &= ~(_BV(LCD_RS));
+void cls()
+{ // clear the display
+	LCD_RS_PORT &= ~(_BV(LCD_RS));
  5d2:	5c 98       	cbi	0x0b, 4	; 11
-   lcd_send_4b_mode(0x01);   
+	lcd_send_4b_mode(0x01);
  5d4:	81 e0       	ldi	r24, 0x01	; 1
  5d6:	da df       	rcall	.-76     	; 0x58c <lcd_send_4b_mode>
-   LCD_RS_PORT |= _BV(LCD_RS);
+	LCD_RS_PORT |= _BV(LCD_RS);
  5d8:	5c 9a       	sbi	0x0b, 4	; 11
 }
  5da:	08 95       	ret
@@ -1042,36 +1038,37 @@ void cls(){     // clear the display
 	}
 }
 
-
-void ini_lcd_4_bit_mode(){
+void ini_lcd_4_bit_mode()
+{
  5dc:	cf 93       	push	r28
  5de:	df 93       	push	r29
  5e0:	c8 e5       	ldi	r28, 0x58	; 88
  5e2:	d0 e0       	ldi	r29, 0x00	; 0
-   unsigned char i;
-	 
-   
-   for (i = 0; i< 8; i++){
-	 	//test = pgm_read_byte(lcd_ini + i);
-    lcd_send_4b_mode(pgm_read_byte(lcd_ini + i));
+	unsigned char i;
+
+	for (i = 0; i < 8; i++)
+	{
+		//test = pgm_read_byte(lcd_ini + i);
+		lcd_send_4b_mode(pgm_read_byte(lcd_ini + i));
  5e4:	fe 01       	movw	r30, r28
  5e6:	84 91       	lpm	r24, Z+
  5e8:	d1 df       	rcall	.-94     	; 0x58c <lcd_send_4b_mode>
  5ea:	21 96       	adiw	r28, 0x01	; 1
 
-void ini_lcd_4_bit_mode(){
-   unsigned char i;
-	 
-   
-   for (i = 0; i< 8; i++){
+void ini_lcd_4_bit_mode()
+{
+	unsigned char i;
+
+	for (i = 0; i < 8; i++)
  5ec:	f0 e0       	ldi	r31, 0x00	; 0
  5ee:	c0 36       	cpi	r28, 0x60	; 96
  5f0:	df 07       	cpc	r29, r31
  5f2:	c1 f7       	brne	.-16     	; 0x5e4 <ini_lcd_4_bit_mode+0x8>
-	 	//test = pgm_read_byte(lcd_ini + i);
-    lcd_send_4b_mode(pgm_read_byte(lcd_ini + i));
-   }
-   LCD_RS_PORT |= _BV(LCD_RS);
+	{
+		//test = pgm_read_byte(lcd_ini + i);
+		lcd_send_4b_mode(pgm_read_byte(lcd_ini + i));
+	}
+	LCD_RS_PORT |= _BV(LCD_RS);
  5f4:	5c 9a       	sbi	0x0b, 4	; 11
 }
  5f6:	df 91       	pop	r29
@@ -1080,8 +1077,8 @@ void ini_lcd_4_bit_mode(){
 
 000005fc <lcd_ini_sequence>:
 	LCD_EN_PORT &= ~(_BV(LCD_EN));
-	_delay_ms (1);
-} 
+	_delay_ms(1);
+}
 
 void lcd_ini_sequence()
 {
@@ -1106,47 +1103,47 @@ void lcd_ini_sequence()
 		__ticks = (uint16_t) (__ms * 10.0);
 		while(__ticks)
  60c:	d9 f7       	brne	.-10     	; 0x604 <lcd_ini_sequence+0x8>
-		
-		_delay_ms(250); //wait for LCD to start up
-		ini_lcd_4_bit_mode();
+
+	_delay_ms(250); //wait for LCD to start up
+	ini_lcd_4_bit_mode();
  60e:	e6 df       	rcall	.-52     	; 0x5dc <ini_lcd_4_bit_mode>
-		cls();
+	cls();
  610:	e0 df       	rcall	.-64     	; 0x5d2 <cls>
  612:	80 e5       	ldi	r24, 0x50	; 80
  614:	93 ec       	ldi	r25, 0xC3	; 195
  616:	01 97       	sbiw	r24, 0x01	; 1
  618:	f1 f7       	brne	.-4      	; 0x616 <lcd_ini_sequence+0x1a>
-		_delay_ms(10); //wait for LCD to start up
-		ini_lcd_4_bit_mode();
+	_delay_ms(10); //wait for LCD to start up
+	ini_lcd_4_bit_mode();
  61a:	e0 df       	rcall	.-64     	; 0x5dc <ini_lcd_4_bit_mode>
-		cls();
+	cls();
  61c:	da df       	rcall	.-76     	; 0x5d2 <cls>
 }
  61e:	08 95       	ret
 
 00000620 <locate>:
-   LCD_RS_PORT |= _BV(LCD_RS);
 }
 
-void locate(unsigned char pos){
-   pos = pos | (1 << 7);
-   LCD_RS_PORT &= ~(_BV(LCD_RS));
+void locate(unsigned char pos)
+{
+	pos = pos | (1 << 7);
+	LCD_RS_PORT &= ~(_BV(LCD_RS));
  620:	5c 98       	cbi	0x0b, 4	; 11
-   lcd_send_4b_mode(pos);   
+	lcd_send_4b_mode(pos);
  622:	80 68       	ori	r24, 0x80	; 128
  624:	b3 df       	rcall	.-154    	; 0x58c <lcd_send_4b_mode>
-   LCD_RS_PORT |= _BV(LCD_RS);
+	LCD_RS_PORT |= _BV(LCD_RS);
  626:	5c 9a       	sbi	0x0b, 4	; 11
 }
  628:	08 95       	ret
 
 0000062a <put_str>:
-	{
-		lcd_send_4b_mode(' ');  
+		lcd_send_4b_mode(' ');
 	}
 }
 
-void put_str(uchar pos, char* str){     
+void put_str(uchar pos, char *str)
+{
  62a:	0f 93       	push	r16
  62c:	1f 93       	push	r17
  62e:	cf 93       	push	r28
@@ -1157,7 +1154,8 @@ void put_str(uchar pos, char* str){
  634:	f5 df       	rcall	.-22     	; 0x620 <locate>
  636:	c0 e0       	ldi	r28, 0x00	; 0
  638:	d0 e0       	ldi	r29, 0x00	; 0
-	for (i = 0; i< 16; i++){				
+	for (i = 0; i < 16; i++)
+	{
 		lcd_send_4b_mode(pgm_read_byte(str + i));
  63a:	f8 01       	movw	r30, r16
  63c:	ec 0f       	add	r30, r28
@@ -1166,15 +1164,16 @@ void put_str(uchar pos, char* str){
  642:	8e 2f       	mov	r24, r30
  644:	a3 df       	rcall	.-186    	; 0x58c <lcd_send_4b_mode>
  646:	21 96       	adiw	r28, 0x01	; 1
-}
 
-void put_str(uchar pos, char* str){     
+void put_str(uchar pos, char *str)
+{
 	uchar i;
 	locate(pos);
-	for (i = 0; i< 16; i++){				
+	for (i = 0; i < 16; i++)
  648:	c0 31       	cpi	r28, 0x10	; 16
  64a:	d1 05       	cpc	r29, r1
  64c:	b1 f7       	brne	.-20     	; 0x63a <put_str+0x10>
+	{
 		lcd_send_4b_mode(pgm_read_byte(str + i));
 	}
 }
@@ -1185,50 +1184,51 @@ void put_str(uchar pos, char* str){
  656:	08 95       	ret
 
 00000658 <clr_line>:
-   LCD_RS_PORT &= ~(_BV(LCD_RS));
-   lcd_send_4b_mode(0x01);   
-   LCD_RS_PORT |= _BV(LCD_RS);
+	lcd_send_4b_mode(0x01);
+	LCD_RS_PORT |= _BV(LCD_RS);
 }
 
-void clr_line(uchar start_add){     // clear line
+void clr_line(uchar start_add)
+{ // clear line
  658:	1f 93       	push	r17
 	uchar i;
 	locate(start_add);
  65a:	e2 df       	rcall	.-60     	; 0x620 <locate>
  65c:	10 e0       	ldi	r17, 0x00	; 0
-	for (i=0; i<16; i++)
+	for (i = 0; i < 16; i++)
 	{
-		lcd_send_4b_mode(' ');  
+		lcd_send_4b_mode(' ');
  65e:	80 e2       	ldi	r24, 0x20	; 32
  660:	95 df       	rcall	.-214    	; 0x58c <lcd_send_4b_mode>
-}
 
-void clr_line(uchar start_add){     // clear line
+void clr_line(uchar start_add)
+{ // clear line
 	uchar i;
 	locate(start_add);
-	for (i=0; i<16; i++)
+	for (i = 0; i < 16; i++)
  662:	1f 5f       	subi	r17, 0xFF	; 255
  664:	10 31       	cpi	r17, 0x10	; 16
  666:	d9 f7       	brne	.-10     	; 0x65e <clr_line+0x6>
 	{
-		lcd_send_4b_mode(' ');  
+		lcd_send_4b_mode(' ');
 	}
 }
  668:	1f 91       	pop	r17
  66a:	08 95       	ret
 
 0000066c <lcd_contrast>:
+   LCD_RS_PORT |= _BV(LCD_RS);
+}*/
+
 void lcd_contrast()
 {
-
-
-	
 }
  66c:	08 95       	ret
 
 0000066e <format>:
 
-void format(char* line1,char* line2){     // reformat the display
+void format(char *line1, char *line2)
+{ // reformat the display
  66e:	ef 92       	push	r14
  670:	ff 92       	push	r15
  672:	0f 93       	push	r16
@@ -1237,14 +1237,15 @@ void format(char* line1,char* line2){     // reformat the display
  678:	df 93       	push	r29
  67a:	8c 01       	movw	r16, r24
  67c:	7b 01       	movw	r14, r22
-    unsigned char i;
-		locate(0);
+	unsigned char i;
+	locate(0);
  67e:	80 e0       	ldi	r24, 0x00	; 0
  680:	cf df       	rcall	.-98     	; 0x620 <locate>
  682:	c0 e0       	ldi	r28, 0x00	; 0
  684:	d0 e0       	ldi	r29, 0x00	; 0
-		for (i = 0; i< 16; i++){				
-			lcd_send_4b_mode(pgm_read_byte(line1 + i));
+	for (i = 0; i < 16; i++)
+	{
+		lcd_send_4b_mode(pgm_read_byte(line1 + i));
  686:	f8 01       	movw	r30, r16
  688:	ec 0f       	add	r30, r28
  68a:	fd 1f       	adc	r31, r29
@@ -1252,24 +1253,26 @@ void format(char* line1,char* line2){     // reformat the display
  68e:	8e 2f       	mov	r24, r30
  690:	7d df       	rcall	.-262    	; 0x58c <lcd_send_4b_mode>
  692:	21 96       	adiw	r28, 0x01	; 1
-}
 
-void format(char* line1,char* line2){     // reformat the display
-    unsigned char i;
-		locate(0);
-		for (i = 0; i< 16; i++){				
+void format(char *line1, char *line2)
+{ // reformat the display
+	unsigned char i;
+	locate(0);
+	for (i = 0; i < 16; i++)
  694:	c0 31       	cpi	r28, 0x10	; 16
  696:	d1 05       	cpc	r29, r1
  698:	b1 f7       	brne	.-20     	; 0x686 <format+0x18>
-			lcd_send_4b_mode(pgm_read_byte(line1 + i));
-		}
-		locate(64);
+	{
+		lcd_send_4b_mode(pgm_read_byte(line1 + i));
+	}
+	locate(64);
  69a:	80 e4       	ldi	r24, 0x40	; 64
  69c:	c1 df       	rcall	.-126    	; 0x620 <locate>
  69e:	c0 e0       	ldi	r28, 0x00	; 0
  6a0:	d0 e0       	ldi	r29, 0x00	; 0
-		for (i = 0; i< 16; i++){
-			lcd_send_4b_mode(pgm_read_byte(line2 + i));
+	for (i = 0; i < 16; i++)
+	{
+		lcd_send_4b_mode(pgm_read_byte(line2 + i));
  6a2:	f7 01       	movw	r30, r14
  6a4:	ec 0f       	add	r30, r28
  6a6:	fd 1f       	adc	r31, r29
@@ -1277,17 +1280,18 @@ void format(char* line1,char* line2){     // reformat the display
  6aa:	8e 2f       	mov	r24, r30
  6ac:	6f df       	rcall	.-290    	; 0x58c <lcd_send_4b_mode>
  6ae:	21 96       	adiw	r28, 0x01	; 1
-		locate(0);
-		for (i = 0; i< 16; i++){				
-			lcd_send_4b_mode(pgm_read_byte(line1 + i));
-		}
-		locate(64);
-		for (i = 0; i< 16; i++){
+	for (i = 0; i < 16; i++)
+	{
+		lcd_send_4b_mode(pgm_read_byte(line1 + i));
+	}
+	locate(64);
+	for (i = 0; i < 16; i++)
  6b0:	c0 31       	cpi	r28, 0x10	; 16
  6b2:	d1 05       	cpc	r29, r1
  6b4:	b1 f7       	brne	.-20     	; 0x6a2 <format+0x34>
-			lcd_send_4b_mode(pgm_read_byte(line2 + i));
-		}
+	{
+		lcd_send_4b_mode(pgm_read_byte(line2 + i));
+	}
 }
  6b6:	df 91       	pop	r29
  6b8:	cf 91       	pop	r28
@@ -1298,11 +1302,11 @@ void format(char* line1,char* line2){     // reformat the display
  6c2:	08 95       	ret
 
 000006c4 <lcd_send_floatx10>:
-   lcd_send_4b_mode(pos);   
-   LCD_RS_PORT |= _BV(LCD_RS);
+	lcd_send_4b_mode(pos);
+	LCD_RS_PORT |= _BV(LCD_RS);
 }
 
-void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
+void lcd_send_floatx10(long data, uchar location, uchar len, uchar d_len)
 {
  6c4:	af 92       	push	r10
  6c6:	bf 92       	push	r11
@@ -1329,9 +1333,9 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  6f0:	b0 2e       	mov	r11, r16
 	//d_len = number of digits after the decimal point
 	char buffer[16];
-	
-	uchar i,y,temp,int_len;
-	t=0;
+
+	uchar i, y, temp, int_len;
+	t = 0;
  6f2:	10 92 00 01 	sts	0x0100, r1
 
 	if (data < 0)
@@ -1358,7 +1362,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  70c:	81 2f       	mov	r24, r17
  70e:	88 df       	rcall	.-240    	; 0x620 <locate>
 
-	i=0;
+	i = 0;
 	if (d_len == 2)
  710:	82 e0       	ldi	r24, 0x02	; 2
  712:	b8 16       	cp	r11, r24
@@ -1366,12 +1370,12 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  716:	8a e0       	ldi	r24, 0x0A	; 10
  718:	01 c0       	rjmp	.+2      	; 0x71c <lcd_send_floatx10+0x58>
  71a:	84 e6       	ldi	r24, 0x64	; 100
-		temp = 100;
-	}else{
-		temp = 10;	
+	else
+	{
+		temp = 10;
 	}
 
-	if( data >= temp){
+	if (data >= temp)
  71c:	90 e0       	ldi	r25, 0x00	; 0
  71e:	a0 e0       	ldi	r26, 0x00	; 0
  720:	b0 e0       	ldi	r27, 0x00	; 0
@@ -1381,7 +1385,8 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  728:	fb 06       	cpc	r15, r27
  72a:	0c f4       	brge	.+2      	; 0x72e <lcd_send_floatx10+0x6a>
  72c:	47 c0       	rjmp	.+142    	; 0x7bc <lcd_send_floatx10+0xf8>
-		if (strlen(buffer)>len)
+	{
+		if (strlen(buffer) > len)
  72e:	fe 01       	movw	r30, r28
  730:	31 96       	adiw	r30, 0x01	; 1
  732:	df 01       	movw	r26, r30
@@ -1408,7 +1413,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  750:	00 e0       	ldi	r16, 0x00	; 0
 		}
 
-		for(i=0; i<(int_len-d_len);i++)
+		for (i = 0; i < (int_len - d_len); i++)
  752:	e8 2e       	mov	r14, r24
  754:	ff 24       	eor	r15, r15
  756:	eb 18       	sub	r14, r11
@@ -1433,7 +1438,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
 			int_len = strlen(buffer);
 		}
 
-		for(i=0; i<(int_len-d_len);i++)
+		for (i = 0; i < (int_len - d_len); i++)
  776:	0f 5f       	subi	r16, 0xFF	; 255
  778:	e0 2f       	mov	r30, r16
  77a:	f0 e0       	ldi	r31, 0x00	; 0
@@ -1452,7 +1457,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  78a:	8f 5f       	subi	r24, 0xFF	; 255
  78c:	80 93 00 01 	sts	0x0100, r24
  790:	10 e0       	ldi	r17, 0x00	; 0
-		for(y=0; y<(d_len);y++)
+		for (y = 0; y < (d_len); y++)
 		{
 			lcd_send_4b_mode(buffer[i]);
  792:	7e 01       	movw	r14, r28
@@ -1465,7 +1470,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  7a0:	f1 1d       	adc	r31, r1
  7a2:	80 81       	ld	r24, Z
  7a4:	f3 de       	rcall	.-538    	; 0x58c <lcd_send_4b_mode>
-			i++;	
+			i++;
 			t++;
  7a6:	80 91 00 01 	lds	r24, 0x0100
  7aa:	8f 5f       	subi	r24, 0xFF	; 255
@@ -1475,18 +1480,18 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
 		}
 		lcd_send_4b_mode('.');
 		t++;
-		for(y=0; y<(d_len);y++)
+		for (y = 0; y < (d_len); y++)
  7b0:	1f 5f       	subi	r17, 0xFF	; 255
  7b2:	81 2f       	mov	r24, r17
  7b4:	80 0f       	add	r24, r16
  7b6:	1b 15       	cp	r17, r11
  7b8:	88 f3       	brcs	.-30     	; 0x79c <lcd_send_floatx10+0xd8>
  7ba:	34 c0       	rjmp	.+104    	; 0x824 <lcd_send_floatx10+0x160>
-			i++;	
 			t++;
 		}
-		
-	}else{
+	}
+	else
+	{
 		lcd_send_4b_mode('0');
  7bc:	80 e3       	ldi	r24, 0x30	; 48
  7be:	e6 de       	rcall	.-564    	; 0x58c <lcd_send_4b_mode>
@@ -1502,9 +1507,9 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  7d2:	8f 5f       	subi	r24, 0xFF	; 255
  7d4:	80 93 00 01 	sts	0x0100, r24
  7d8:	10 e0       	ldi	r17, 0x00	; 0
-		for(y=0; y<d_len;y++)
+		for (y = 0; y < d_len; y++)
 		{
-			if(y < strlen(buffer))
+			if (y < strlen(buffer))
  7da:	7e 01       	movw	r14, r28
  7dc:	08 94       	sec
  7de:	e1 1c       	adc	r14, r1
@@ -1523,7 +1528,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  7f8:	bf 07       	cpc	r27, r31
  7fa:	48 f4       	brcc	.+18     	; 0x80e <lcd_send_floatx10+0x14a>
 			{
-				lcd_send_4b_mode(buffer[y]);	
+				lcd_send_4b_mode(buffer[y]);
  7fc:	ae 0d       	add	r26, r14
  7fe:	bf 1d       	adc	r27, r15
  800:	8c 91       	ld	r24, X
@@ -1533,12 +1538,12 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
  804:	80 91 00 01 	lds	r24, 0x0100
  808:	8f 5f       	subi	r24, 0xFF	; 255
  80a:	80 93 00 01 	sts	0x0100, r24
-	}else{
+	{
 		lcd_send_4b_mode('0');
 		t++;
 		lcd_send_4b_mode('.');
 		t++;
-		for(y=0; y<d_len;y++)
+		for (y = 0; y < d_len; y++)
  80e:	1f 5f       	subi	r17, 0xFF	; 255
  810:	1b 15       	cp	r17, r11
  812:	40 f3       	brcs	.-48     	; 0x7e4 <lcd_send_floatx10+0x120>
@@ -1546,7 +1551,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
 	}
 
 	//fill remaining digits with spaaces
-	while (t<(len))//was 4
+	while (t < (len)) //was 4
 	{
 		lcd_send_4b_mode(' ');
  816:	80 e2       	ldi	r24, 0x20	; 32
@@ -1560,7 +1565,7 @@ void lcd_send_floatx10(long data,uchar location, uchar len, uchar d_len)
 	}
 
 	//fill remaining digits with spaaces
-	while (t<(len))//was 4
+	while (t < (len)) //was 4
  824:	80 91 00 01 	lds	r24, 0x0100
  828:	8a 15       	cp	r24, r10
  82a:	a8 f3       	brcs	.-22     	; 0x816 <lcd_send_floatx10+0x152>

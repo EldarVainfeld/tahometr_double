@@ -85,7 +85,7 @@ int main()
 		gl_set[j].anim_counter = 0;
 		gl_set[j].anim_counter_old = 0;
 	}
-	
+
 	LED_OFF;
 	switch_sensor();
 	ADCSRA = (1 << ADEN) | (1 << ADATE) | (1 << ADIE) | (1 << ADSC) | 5;
@@ -122,13 +122,13 @@ int main()
 		{
 			gl_set[0].anim_counter_old = gl_set[0].anim_counter;
 			locate(14);
-			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);			
+			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);
 		}
 		if (gl_set[1].anim_counter != gl_set[1].anim_counter_old)
 		{
 			gl_set[1].anim_counter_old = gl_set[1].anim_counter;
 			locate(78);
-			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);			
+			lcd_send_4b_mode((uchar)animation[(uchar)gl_set[0].anim_counter]);
 		}
 	}
 	return 0;
