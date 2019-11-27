@@ -19,11 +19,11 @@ ISR(ADC_vect)
 		TCNT1 = 0;
 		t_postscale = post_scaller;
 		post_scaller = 0;
-		if (measurement_started)
+		if (measurement_started && measurement_zero)
 		{
 			measurement_started = 0;
 		}
-		else if (!measurement_done)
+		else if (!measurement_done && measurement_zero)
 		{
 			time_count = t_capture + (t_postscale * 65536);
 			if (time_count)
@@ -50,6 +50,7 @@ ISR(ADC_vect)
 	if ((gl_set[sensor_id].ir_value < gl_set[sensor_id].ain_th_low) && (gl_set[sensor_id].last_state == 1)) //a low level is detected
 	{
 		gl_set[sensor_id].last_state = 0; //for next edge detection, use the rising hysteresis for next detection
+		measurement_zero = 1; // we found the low level and now waiting for high
 	}
 
 	if (delta(gl_set[sensor_id].ir_history_a, gl_set[sensor_id].ir_value) > 10)

@@ -42,6 +42,7 @@ void switch_sensor()
 		ADMUX = 3;
 	}
 	measurement_started = 1;
+	measurement_zero = 0;
 	measurement_done = 0;
 }
 

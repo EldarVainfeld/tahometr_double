@@ -106,7 +106,7 @@ struct global_settings
 //globals
 struct global_settings gl_set[2]; // we are going to have two sets of variables for every sensor
 uchar sensor_id;				  //the id-number of the current sensor
-uchar measurement_started, measurement_done;
+uchar measurement_zero, measurement_started, measurement_done;
 long rpm_x10, time_count;
 unsigned int t_capture, t_postscale;
 uchar post_scaller;
